@@ -65,8 +65,6 @@ latex/
 *.x86_64
 *.hex
 
-
-
 # Executable files
 *.exe
 *.out
