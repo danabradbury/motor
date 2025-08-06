@@ -1,0 +1,73 @@
+# Build directories
+Debug/
+Release/
+build/
+Build/
+
+# Eclipse/STM32CubeIDE specific files
+.metadata/
+.settings/
+.project
+.cproject
+.launches/
+*.launch
+
+# Generated files
+*.d
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.map
+*.list
+*.lss
+*.sym
+*.tmp
+
+# Backup and temporary files
+*.bak
+*.swp
+*.tmp
+*~
+.#*
+
+# IDE specific
+.vscode/
+*.sublime-*
+
+# STM32CubeMX generated (optional - some prefer to track these)
+# Uncomment if you want to ignore auto-generated files
+# Drivers/
+# Middlewares/
+# *.ioc
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Documentation build
+html/
+latex/
+
+# Flash/debug files
+*.jlink
+*.uvopt
+*.uvproj
+*.uvgui.*
+*.bak
+
+# Compiler specific
+*.i*86
+*.x86_64
+*.hex
+
+
+
+# Executable files
+*.exe
+*.out
+*.app
