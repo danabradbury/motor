@@ -121,6 +121,7 @@ int main(void)
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL);
 
+  int32_t testSteps = 96000;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,21 +139,32 @@ int main(void)
 	}*/
 
 	  counter1Value = TIM5->CNT;
+	  angleValue = (360.0/2400.0) * ((float)counter1Value);
+	  sprintf(printMessage, "Encoder 1: %d, Angle: %.2f, Change: %ld, Motor 1 Steps Needed: %ld,  Accumulated: %ld\n\r",
+	  counter1Value, angleValue, encoderChange, motorStepsNeeded, motor1StepAccumulator);
+	  HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);
+	  pastCounter1Value = counter1Value;
+
+	  sendStepsMotor1(testSteps);
+	  HAL_Delay(5000);
+
+	  testSteps = -testSteps;
+
 	  //handle encoder and motor 1
-	  if (counter1Value != pastCounter1Value) {
-		 encoderChange = counter1Value - pastCounter1Value;
+	  //if (counter1Value != pastCounter1Value) {
+		 /*encoderChange = counter1Value - pastCounter1Value;
 		 motorStepsNeeded = encoderChange * 4; // (9600/2400)
-		 sendStepsMotor1(motorStepsNeeded);
+		 sendStepsMotor1(motorStepsNeeded);*/
 
 		 // Calculate and display angle and other details
 		 /*angleValue = (360.0/2400.0) * ((float)counter1Value);
 		 sprintf(printMessage, "Encoder 1: %d, Angle: %.2f, Change: %ld, Motor 1 Steps Needed: %ld,  Accumulated: %ld\n\r",
 				  counter1Value, angleValue, encoderChange, motorStepsNeeded, motor1StepAccumulator);
 		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);*/
-	  }
-	  pastCounter1Value = counter1Value;
+	 // }
+	  //pastCounter1Value = counter1Value;
 
-	  counter2Value = TIM2->CNT;
+	 /* counter2Value = TIM2->CNT;
 	  //handle encoder and motor 2
 	  if (counter2Value != pastCounter2Value) {
 		 encoderChange = counter2Value - pastCounter2Value;
@@ -160,13 +172,13 @@ int main(void)
 		 sendStepsMotor2(motorStepsNeeded);
 
 		 // Calculate and display angle
-		 /*angleValue = (360.0/2400.0) * ((float)counter2Value);
+		 angleValue = (360.0/2400.0) * ((float)counter2Value);
 		 sprintf(printMessage, "Encoder 2: %d, Angle: %.2f, Change: %ld, Motor 1 Steps Needed: %ld\n\r",
 				  counter2Value, angleValue, encoderChange, motorStepsNeeded);
-		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);*/
+		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);
 
 	  }
-	  pastCounter2Value = counter2Value;
+	  pastCounter2Value = counter2Value;*/
 
     /* USER CODE END WHILE */
 
