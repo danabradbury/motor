@@ -126,29 +126,30 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+  // test code
+  	for (int i = 0; i < 16; i++) {
+  		sendStepsMotor2(960000);
+  		HAL_Delay(3000);  // Wait for 1 second
+  		sendStepsMotor1(-96000);
+  		HAL_Delay(3000);
+  	}
   while (1)
   {
 
-	/*// test code
-	for (int i = 0; i < 16; i++) {
-		sendStepsMotor2(2400);
-		HAL_Delay(3000);  // Wait for 1 second
-		sendStepsMotor2(-2400);
-		HAL_Delay(3000);
-	}*/
+
 
 	  counter1Value = TIM5->CNT;
 	  //handle encoder and motor 1
 	  if (counter1Value != pastCounter1Value) {
 		 encoderChange = counter1Value - pastCounter1Value;
-		 motorStepsNeeded = encoderChange * 4; // (9600/2400)
+		 motorStepsNeeded = encoderChange * 4 * 20; // (9600/2400)
 		 sendStepsMotor1(motorStepsNeeded);
 
 		 // Calculate and display angle and other details
-		 /*angleValue = (360.0/2400.0) * ((float)counter1Value);
+		 angleValue = (360.0/2400.0) * ((float)counter1Value);
 		 sprintf(printMessage, "Encoder 1: %d, Angle: %.2f, Change: %ld, Motor 1 Steps Needed: %ld,  Accumulated: %ld\n\r",
 				  counter1Value, angleValue, encoderChange, motorStepsNeeded, motor1StepAccumulator);
-		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);*/
+		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);
 	  }
 	  pastCounter1Value = counter1Value;
 
@@ -160,10 +161,10 @@ int main(void)
 		 sendStepsMotor2(motorStepsNeeded);
 
 		 // Calculate and display angle
-		 /*angleValue = (360.0/2400.0) * ((float)counter2Value);
+		 angleValue = (360.0/2400.0) * ((float)counter2Value);
 		 sprintf(printMessage, "Encoder 2: %d, Angle: %.2f, Change: %ld, Motor 1 Steps Needed: %ld\n\r",
 				  counter2Value, angleValue, encoderChange, motorStepsNeeded);
-		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);*/
+		 HAL_UART_Transmit(&huart2, (uint8_t*)printMessage, strlen(printMessage), 300);
 
 	  }
 	  pastCounter2Value = counter2Value;
